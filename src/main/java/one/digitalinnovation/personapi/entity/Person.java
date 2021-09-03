@@ -1,51 +1,38 @@
 package one.digitalinnovation.personapi.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
+
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Person {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column
-    private String name;
+    @Column(nullable = false)
+    private String firstName;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String cpf;
 
+    @Column(nullable = true)
+    private LocalDate birthDate;
 
-    public Person(String name, String cpf) {
-        this.name = name;
-        this.cpf = cpf;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCpf() {
-        return this.cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", cpf='" + cpf + '\'' +
-                '}';
-    }
-
-
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private List<Phone> phones;
 
 
 }
