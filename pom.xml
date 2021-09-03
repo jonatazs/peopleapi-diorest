@@ -14,7 +14,6 @@
 	<description>Person API project for DIO</description>
 	<properties>
 		<java.version>11</java.version>
-		<maven.compiler.release>11</maven.compiler.release>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -72,7 +71,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<release>11</release>
+					<source>11</source>  <!-- same as <java.version> -->
+					<target>11</target>    <!-- same as <java.version> -->
 				</configuration>
 			</plugin>
 			<plugin>
